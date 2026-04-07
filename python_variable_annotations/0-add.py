@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
-def add(a: float, b: float) -> float: 
-    """pycodestyle 0-add.py"""
+"""Add funksiyası üçün modul sənədləşdirməsi."""
+
+
+def add(a: float, b: float) -> float:
+    """İki float ədədin cəmini qaytarır."""
     return a + b
