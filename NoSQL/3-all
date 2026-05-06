@@ -1,1 +1,2 @@
+// This script is for Holberton School MongoDB task
 db.school.find()
