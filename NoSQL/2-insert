@@ -1,0 +1,2 @@
+//pdjrgjeiorji
+db.school.insert({ "name": "Holberton school" })
