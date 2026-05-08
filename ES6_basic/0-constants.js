@@ -1,9 +1,8 @@
-//Lets do it
 export function taskFirst() {
   const task = 'I prefer const when I can.';
   return task;
 }
-//oijoiio
+
 export function getLast() {
   return ' is okay';
 }
