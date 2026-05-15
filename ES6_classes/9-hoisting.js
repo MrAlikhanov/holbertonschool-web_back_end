@@ -1,3 +1,7 @@
+/**
+ * Fixed Hoisting and Logic Issues
+ */
+
 // 1. Define classes first (Classes are not hoisted)
 export class HolbertonClass {
   constructor(year, location) {
@@ -26,16 +30,16 @@ export class StudentHolberton {
   }
 
   get holbertonClass() {
-    return this._holbertonClass; // Fixed: was missing the underscore, causing recursion
+    return this._holbertonClass;
   }
 
   get fullStudentDescription() {
-    // Fixed: changed 'self' to 'this'
-    return `${this._firstName} ${this._lastName} - ${this._holbertonClass.year} - ${this._location}`;
+    // Changed 'self' to 'this' and accessed properties correctly
+    return `${this._firstName} ${this._lastName} - ${this._holbertonClass.year} - ${this._holbertonClass.location}`;
   }
 }
 
-// 2. Instantiate objects after classes are defined
+// 2. Setup the data after classes are defined
 const class2019 = new HolbertonClass(2019, 'San Francisco');
 const class2020 = new HolbertonClass(2020, 'San Francisco');
 
@@ -45,5 +49,6 @@ const student3 = new StudentHolberton('Albert', 'Clinton', class2019);
 const student4 = new StudentHolberton('Donald', 'Bush', class2019);
 const student5 = new StudentHolberton('Jason', 'Sandler', class2019);
 
-// 3. Export the list
-export const listOfStudents = [student1, student2, student3, student4, student5];
+// 3. Export the list as default to match the import in 9-main.js
+const listOfStudents = [student1, student2, student3, student4, student5];
+export default listOfStudents;
