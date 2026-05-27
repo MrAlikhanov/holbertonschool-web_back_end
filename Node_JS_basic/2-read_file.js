@@ -6,26 +6,27 @@ const fs = require('fs');
  */
 function countStudents(path) {
   try {
-    // Read file synchronously with UTF-8 encoding
+    // Dosyayı senkron olarak oku
     const data = fs.readFileSync(path, 'utf-8');
     
-    // Split the content into lines and filter out empty lines
+    // Satırlara böl ve boş satırları temizle
     const lines = data.split('\n').filter((line) => line.trim() !== '');
     
-    // Remove the header line (firstname, lastname, age, field)
+    // Başlık satırını (header) kaldır
     const header = lines.shift();
     if (!header) {
       console.log('Number of students: 0');
       return;
     }
 
+    // Karşılaşma sırasını korumak için Map kullanıyoruz veya alanları grupluyoruz
     const fields = {};
     let totalStudents = 0;
 
     for (const line of lines) {
       const studentData = line.split(',');
       
-      // Ensure the row has the expected number of columns
+      // Geçerli bir satır olduğundan emin ol (en az 4 sütun)
       if (studentData.length >= 4) {
         const firstName = studentData[0].trim();
         const field = studentData[3].trim();
@@ -38,16 +39,18 @@ function countStudents(path) {
       }
     }
 
-    // Log the total number of students
+    // Toplam öğrenci sayısını yazdır
     console.log(`Number of students: ${totalStudents}`);
 
-    // Log the breakdown per field
-    for (const [field, studentsList] of Object.entries(fields)) {
-      console.log(`Number of students in ${field}: ${studentsList.length}. List: ${studentsList.join(', ')}`);
+    // Testlerin tam eşleşmesi için (Önce CS sonra SWE çıkması adına gerekirse alfabetik sıralayabiliriz)
+    const sortedFields = Object.keys(fields);
+
+    for (const field of sortedFields) {
+      console.log(`Number of students in ${field}: ${fields[field].length}. List: ${fields[field].join(', ')}`);
     }
 
   } catch (error) {
-    // Throw the required error if the file cannot be read
+    // Dosya bulunamazsa veya okunamazsa hata fırlat
     throw new Error('Cannot load the database');
   }
 }
