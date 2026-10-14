@@ -11,11 +11,12 @@ class StudentsController {
           .toLowerCase()
           .localeCompare(b.toLowerCase()));
 
-        for (const field of sortedFields) {
+        sortedFields.forEach((field) => {
           lines.push(
             `Number of students in ${field}: ${fields[field].length}. List: ${fields[field].join(', ')}`,
           );
-        }
+        });
+
         response.status(200).send(lines.join('\n'));
       })
       .catch(() => {
